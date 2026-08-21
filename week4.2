@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+class Student {
+    String name;
+    int credits;
+    double attendance;
+    boolean feePaid;
+
+    Student(String name, int credits, double attendance, boolean feePaid) {
+        this.name = name;
+        this.credits = credits;
+        this.attendance = attendance;
+        this.feePaid = feePaid;
+    }
+
+    boolean canRegister() {
+        // Constraints
+        if (credits > 24) {
+            System.out.println("Constraint Failed: Maximum 24 credits allowed.");
+            return false;
+        }
+
+        if (attendance < 75) {
+            System.out.println("Constraint Failed: Attendance must be at least 75%.");
+            return false;
+        }
+
+        if (!feePaid) {
+            System.out.println("Constraint Failed: Fees must be paid.");
+            return false;
+        }
+
+        return true;
+    }
+
+    void displayResult() {
+        if (canRegister())
+            System.out.println("Registration Successful!");
+        else
+            System.out.println("Registration Failed.");
+    }
+}
+
+public class ConstraintDriven {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Student Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Number of Credits: ");
+        int credits = sc.nextInt();
+
+        System.out.print("Enter Attendance Percentage: ");
+        double attendance = sc.nextDouble();
+
+        System.out.print("Fees Paid? (true/false): ");
+        boolean feePaid = sc.nextBoolean();
+
+        Student s = new Student(name, credits, attendance, feePaid);
+
+        System.out.println("\n--- REGISTRATION CHECK ---");
+        s.displayResult();
+
+        sc.close();
+    }
+}
